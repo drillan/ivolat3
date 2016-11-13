@@ -3,7 +3,7 @@ try:
 except ImportError:
     from distutils.core import setup, Extension
 
-VERSION = "0.1.2"
+VERSION = "0.0.0"
 LONG_DESCRIPTION = """
 calculate items by Black-Scholes model.
 * call price
@@ -33,5 +33,6 @@ if __name__ == '__main__':
           long_description=LONG_DESCRIPTION,
           classifiers=[
               'Programming Language :: Python :: 3',
+              'License :: OSI Approved :: MIT License',
           ],
           packages=['ivolat3'], ext_modules=[bs])
