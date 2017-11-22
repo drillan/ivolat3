@@ -210,17 +210,22 @@ double _bs_dualgamma(double S, double K, double r, double q, double t, double si
 }
 
 double _bs_ivolat(double S, double K, double r, double q, double t, double p, int pc) {
+	const double e = 0.0001;
 	double sigma = sqrt(fabs(log(S/K)+r*t)*2/t);
 	double bsprem = 0;
+	double v;
 	int cnt = 0;
 
-	while (fabs(bsprem - p)> 0.0001 && cnt < MAX_IV_LOOP){
+	if(sigma < e)
+		sigma = e;
+
+	while (fabs(bsprem - p)> e && cnt < MAX_IV_LOOP){
 		if(pc == CALL){
 			bsprem = _bs_prem_call(S, K, r, q, t, sigma);
 		}else{
 			bsprem = _bs_prem_put(S, K, r, q, t, sigma);
 		}
-		double v = _bs_vega(S, K, r, q, t, sigma);
+		v = _bs_vega(S, K, r, q, t, sigma);
 		sigma = sigma - (bsprem-p) / v;
 		cnt++;
 	}

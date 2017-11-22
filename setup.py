@@ -3,7 +3,7 @@ try:
 except ImportError:
     from distutils.core import setup, Extension
 
-VERSION = "0.0.0"
+VERSION = "0.0.1"
 LONG_DESCRIPTION = """
 calculate items by Black-Scholes model.
 * call price
